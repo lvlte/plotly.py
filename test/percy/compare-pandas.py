@@ -1,13 +1,18 @@
 import difflib
 import json
 import os
+import math
 
 os.chdir(os.path.dirname(__file__))
 
 
+D = pow(2, 23)
+
+
 def clean_float(numstr):
-    # round numbers to 3 digits, to remove floating-point differences
-    return round(float(numstr), 3)
+    # Remove floating-point differences
+    # Noting that if one sets a Float32 to 1.1 it is set to 1.100000023841858
+    return math.ceil(float(numstr) * D) / D
 
 
 def get_fig(html):
